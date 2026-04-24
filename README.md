@@ -1,6 +1,6 @@
 # Does Money Buy Wins?
 ### Visualizing the Payroll-Performance Relationship in NFL, NBA & MLB
-**CS-GY 6313: Information Visualization — Final Project**
+**CS-GY 6313: Information Visualization - Final Project**
 **Author: Khushi Agarwal | NYU Tandon School of Engineering**
 
 ---
@@ -18,11 +18,11 @@ visualization, and an AI-powered chat interface for natural language queries.
 
 | View | Description |
 |------|-------------|
-| View 1 | Scatter plot — Payroll Rank vs Win % with per-league regression overlays |
-| View 2 | Dual-axis time series — team payroll and win % over time (click-linked) |
-| View 3 | Heatmap — playoff rate by payroll quintile and league |
-| View 4 | 3D scatter — Payroll Rank × Season × Win % (rotatable) |
-| View 5 | AI chat — ask natural language questions about the data (powered by Groq) |
+| View 1 | Scatter plot - Payroll Rank vs Win % with per-league regression overlays |
+| View 2 | Dual-axis time series - team payroll and win % over time (click-linked) |
+| View 3 | Heatmap - playoff rate by payroll quintile and league |
+| View 4 | 3D scatter - Payroll Rank × Season × Win % (rotatable) |
+| View 5 | AI chat - ask natural language questions about the data (powered by Groq) |
 
 ---
 
@@ -75,12 +75,12 @@ Then open your browser and go to: **http://localhost:8050**
 
 ## Usage
 
-- **Filter by League** — use checkboxes to show/hide NBA, NFL, MLB
-- **Season Range** — drag the slider to filter by year range
+- **Filter by League** - use checkboxes to show/hide NBA, NFL, MLB
+- **Season Range** - drag the slider to filter by year range
 - **Click a dot** in View 1 to update View 2 with that team's history
 - **Team dropdown** in View 2 to manually select any team
 - **Rotate** the 3D chart by clicking and dragging
-- **Ask AI** — click a suggested question or type your own
+- **Ask AI** - click a suggested question or type your own
 
 ---
 
