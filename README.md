@@ -1,129 +1,98 @@
-# Does Money Buy Wins?
-### Visualizing the Payroll-Performance Relationship in NFL, NBA & MLB
-**CS-GY 6313: Information Visualization - Final Project**
-**Author: Khushi Agarwal | NYU Tandon School of Engineering**
+<h1 align="center">Does Money Buy Wins? 🏀</h1>
+<p align="center">
+  <b>An interactive multi-view dashboard exploring the payroll-performance relationship across the NFL, NBA, and MLB (1990–2022), with an LLM chat interface for natural-language Q&A.</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/Plotly_Dash-3F4F75?style=flat&logo=plotly&logoColor=white">
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white">
+  <img src="https://img.shields.io/badge/Groq-F55036?style=flat&logo=groq&logoColor=white">
+  <img src="https://img.shields.io/badge/Llama_3.3-0467DF?style=flat&logoColor=white">
+</p>
 
 ---
 
-## Overview
+## What it does
 
-An interactive multi-view dashboard that explores whether financial investment
-translates into competitive success across three major US sports leagues (NFL,
-NBA, MLB) from 1990–2022. The system features coordinated views, a 3D
-visualization, and an AI-powered chat interface for natural language queries.
+An interactive dashboard that investigates whether financial investment translates into competitive success across three major US sports leagues over three decades. Five coordinated views, a 3D rotatable scatter plot, and an AI chat interface powered by Llama 3.3-70B let users drill into the data through both visual and conversational interfaces.
 
 ---
 
-## Features
+## Five views
 
 | View | Description |
-|------|-------------|
-| View 1 | Scatter plot - Payroll Rank vs Win % with per-league regression overlays |
-| View 2 | Dual-axis time series - team payroll and win % over time (click-linked) |
-| View 3 | Heatmap - playoff rate by payroll quintile and league |
-| View 4 | 3D scatter - Payroll Rank × Season × Win % (rotatable) |
-| View 5 | AI chat - ask natural language questions about the data (powered by Groq) |
+|---|---|
+| **View 1** | Scatter plot — Payroll Rank vs. Win % with per-league regression overlays |
+| **View 2** | Dual-axis time series — team payroll and win % over time (click-linked from View 1) |
+| **View 3** | Heatmap — playoff rate by payroll quintile and league |
+| **View 4** | 3D scatter — Payroll Rank × Season × Win % (rotatable, drag-to-explore) |
+| **View 5** | AI chat — natural-language questions about the data, powered by Groq's Llama 3.3-70B |
 
 ---
 
-## Requirements
+## Tech stack
 
-- Python 3.8+
-- See `requirements.txt` for all dependencies
+| Layer | Technology |
+|---|---|
+| Framework | Plotly Dash |
+| Visualization | Plotly (incl. 3D scatter) |
+| Data | NBA Payroll, NBA Player Stats, NBA Salaries, NFL Salary by Position, MLB Team Stats |
+| Compute | Pandas |
+| LLM | Llama 3.3-70B via the Groq API |
 
 ---
 
-## Installation
+## What's interesting about this build
+
+**LLM integration for data Q&A.** View 5 lets users ask natural-language questions about the dataset and get grounded responses powered by Llama 3.3-70B via Groq's inference API. Suggested-question pills make it easy to get started; the chat is integrated directly into the Dash app rather than living in a separate page.
+
+**Click-linked coordinated views.** Clicking a dot in View 1 (Payroll Rank vs. Win %) updates View 2 (the team's payroll and win % over time) so the user can drill into a single team's history without losing context.
+
+**3D dimension.** View 4 adds the temporal dimension to the payroll-performance relationship, letting users rotate the scatter to see how the NBA's payroll effect has strengthened over time vs. the NFL's salary cap flattening it.
+
+---
+
+## Key findings
+
+- **NBA** shows the strongest payroll-performance correlation: top spenders win **76%** of games vs. **27%** for the lowest-spending teams
+- **NFL** shows the weakest correlation (**70%** vs. **34%**), thanks to its hard salary cap
+- **MLB** sits in the middle (**69%** vs. **31%**) with a soft luxury tax structure
+- The 3D view reveals that the NBA's payroll effect has **strengthened over time** while the NFL's has remained flat
+
+---
+
+## Run it locally
 
 ```bash
-# 1. Clone or download this project folder
-
-# 2. Install dependencies
+# 1. Install dependencies
 pip install -r requirements.txt
 
-# 3. Set your Groq API key (free at console.groq.com)
+# 2. Set your Groq API key (free at console.groq.com)
 export GROQ_API_KEY="your_groq_api_key_here"
+# On Windows: set GROQ_API_KEY=your_groq_api_key_here
 
-# On Windows:
-set GROQ_API_KEY=your_groq_api_key_here
+# 3. Make sure all CSV/XLSX data files are in the same folder
+
+# 4. Run
+python sports_viz.py
 ```
+
+Open `http://localhost:8050`.
 
 ---
 
-## Data Setup
-
-Place the following files in the **same folder** as `sports_viz.py`:
+## Data sources
 
 | File | Source |
-|------|--------|
-| `NBA Payroll(1990-2023).csv` | Kaggle: loganlauton/nba-players-and-team-data |
-| `Games.csv` | Kaggle: loganlauton/nba-players-and-team-data |
+|---|---|
+| `NBA Payroll(1990-2023).csv` | Kaggle: `loganlauton/nba-players-and-team-data` |
+| `Games.csv` | Kaggle: `loganlauton/nba-players-and-team-data` |
 | `NFL Salary By Position Group.xlsx` | Kaggle: NFL salary dataset |
 | `mlb_teams.csv` | Kaggle: MLB team stats dataset |
 
 ---
 
-## Running the App
+## Built for
 
-```bash
-python sports_viz.py
-```
-
-Then open your browser and go to: **http://localhost:8050**
-
----
-
-## Usage
-
-- **Filter by League** - use checkboxes to show/hide NBA, NFL, MLB
-- **Season Range** - drag the slider to filter by year range
-- **Click a dot** in View 1 to update View 2 with that team's history
-- **Team dropdown** in View 2 to manually select any team
-- **Rotate** the 3D chart by clicking and dragging
-- **Ask AI** - click a suggested question or type your own
-
----
-
-## Project Structure
-
-```
-sports_viz/
-├── sports_viz.py              # Main dashboard application
-├── requirements.txt           # Python dependencies
-├── README.md                  # This file
-├── NBA Payroll(1990-2023).csv
-├── Games.csv
-├── NFL Salary By Position Group.xlsx
-└── mlb_teams.csv
-```
-
----
-
-## Dependencies
-
-```
-dash==2.14.0
-plotly==5.18.0
-pandas==2.1.0
-requests==2.31.0
-openpyxl==3.1.2
-```
-
----
-
-## Key Findings
-
-- **NBA** shows the strongest payroll-performance correlation: top spenders
-  win 76% of games vs 27% for lowest spenders
-- **NFL** shows the weakest correlation (70% vs 34%) due to its hard salary cap
-- **MLB** sits in the middle (69% vs 31%) with a soft luxury tax structure
-- The 3D view reveals that the NBA's payroll effect has strengthened over time
-
----
-
-## Bonus Features
-
-- **3D Visualization** (View 4): interactive rotatable scatter plot adding
-  the time dimension
-- **AI Integration** (View 5): natural language Q&A powered by
-  Llama 3.3-70B via Groq API
+NYU **CS-GY 6313 — Information Visualization** · Final Project · *Author: Khushi Agarwal*
